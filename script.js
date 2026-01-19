@@ -9,7 +9,6 @@ window.addEventListener('scroll', () => {
         header.style.padding = "30px 60px";
         header.style.boxShadow = "none";
     }
-
     document.addEventListener('DOMContentLoaded', function() {
         const sidebar = document.querySelector('.services-sidebar');
         const trigger = document.querySelector('.sidebar-trigger');
