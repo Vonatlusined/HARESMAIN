@@ -1,36 +1,43 @@
 document.addEventListener('DOMContentLoaded', function() {
-    // 1. Скролл хедера
-    const header = document.querySelector('.main-header');
-    window.addEventListener('scroll', () => {
-        if (window.scrollY > 50) {
-            header.style.background = "rgba(255,255,255,0.95)";
-            header.style.padding = "10px 60px";
-        } else {
-            header.style.background = "transparent";
-            header.style.padding = "30px 60px";
-        }
-    });
-
-    // 2. Логика мобильного меню
+    const header = classExists('.main-header') ? document.querySelector('.main-header') : null;
     const toggle = document.getElementById('mobile-toggle');
     const sidebar = document.querySelector('.services-sidebar');
     const navLinks = document.querySelectorAll('.sidebar-nav a');
 
-    if (toggle) {
-        toggle.addEventListener('click', function() {
+    // 1. Прозрачность хедера при скролле
+    window.addEventListener('scroll', () => {
+        if (header) {
+            if (window.scrollY > 50) {
+                header.style.background = "rgba(255,255,255,0.95)";
+                header.style.padding = "15px 60px";
+            } else {
+                header.style.background = "transparent";
+                header.style.padding = "30px 60px";
+            }
+        }
+    });
+
+    // 2. Логика мобильного меню (Бургер)
+    if (toggle && sidebar) {
+        toggle.addEventListener('click', function(e) {
+            e.stopPropagation();
             toggle.classList.toggle('active');
             sidebar.classList.toggle('open');
-            // Запрещаем скролл, когда меню открыто
             document.body.style.overflow = sidebar.classList.contains('open') ? 'hidden' : 'auto';
         });
     }
 
-    // Закрытие при клике на ссылку
+    // 3. Закрытие при клике на ссылки
     navLinks.forEach(link => {
         link.addEventListener('click', () => {
-            toggle.classList.remove('active');
-            sidebar.classList.remove('open');
+            if (toggle) toggle.classList.remove('active');
+            if (sidebar) sidebar.classList.remove('open');
             document.body.style.overflow = 'auto';
         });
     });
+
+    // Вспомогательная функция
+    function classExists(className) {
+        return document.querySelector(className) !== null;
+    }
 });
