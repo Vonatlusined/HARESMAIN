@@ -355,139 +355,113 @@ model-viewer { width: 100%; height: 100%; }
     }
 }
 
-/* Совсем маленькие экраны (iPhone SE и т.д.) */
-@media (max-width: 480px) {
-    .nav-menu {
-        display: none; /* Скрываем меню, если оно не влезает (можно заменить на иконку-бургер) */
-    }
-
-    .main-header {
-        justify-content: center;
-    }
-}
-/* --- ГЛОБАЛЬНАЯ АДАПТАЦИЯ (Мобильные устройства) --- */
 @media (max-width: 768px) {
 
-    /* 1. Главная страница: меняем структуру на вертикальную */
-    .hero-container {
-        flex-direction: column; /* Текст и фонарик друг под другом */
-        justify-content: flex-start;
-        padding-top: 100px; /* Место под хедер */
-        height: auto;
-        min-height: 100vh;
-        text-align: center;
-    }
-
-    /* Фонарик (Canvas) - ставим его ПЕРЕД текстом */
-    #canvas3d {
-        order: -1; /* Выносит 3D модель наверх */
-        width: 100% !important;
-        height: 300px !important; /* Ограничиваем высоту на телефоне */
-        margin-bottom: -30px; /* Прижимаем к тексту */
-    }
-
-    .hero-content {
+    /* 1. ХЕДЕР - Фиксируем сверху */
+    .main-header {
+        position: fixed;
+        top: 0;
+        left: 0;
         width: 100%;
-        padding: 0 20px 50px;
-        align-items: center; /* Центруем кнопки и текст */
+        background: #fff;
+        z-index: 1000;
+        height: 60px;
+        padding: 0 15px;
+        box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+    }
+
+    /* 2. ГЛАВНАЯ СТРАНИЦА - Вертикальный стек */
+    .hero-container {
+        display: flex;
+        flex-direction: column; /* Сначала модель, потом текст */
+        padding-top: 60px; /* Отступ под хедер */
+        height: auto;
+        overflow-x: hidden;
+    }
+
+    /* 3. 3D МОДЕЛЬ - Четко сверху */
+    #canvas3d {
+        position: relative !important;
+        width: 100% !important;
+        height: 300px !important; /* Фиксированная высота для мобилы */
+        order: 1; /* Первый элемент */
+    }
+
+    /* 4. ТЕКСТ - Под моделью */
+    .hero-content {
+        position: relative;
+        width: 100%;
+        padding: 20px;
+        text-align: center;
+        order: 2; /* Второй элемент */
+        z-index: 10;
     }
 
     .hero-content h1 {
-        font-size: 2.5rem;
-        letter-spacing: 5px;
+        font-size: 1.8rem !important;
+        margin-bottom: 20px;
     }
 
-    /* 2. Навигация (Header) */
-    .main-header {
-        background: rgba(255, 255, 255, 0.95); /* Делаем непрозрачным для читаемости */
-        backdrop-filter: blur(10px);
-        padding: 15px;
-    }
-
-    .nav-menu {
-        gap: 10px;
-    }
-
-    .nav-menu a {
-        font-size: 0.8rem;
-        letter-spacing: 1px;
-    }
-
-    /* 3. Боковая панель (Leistungen) - на мобильных делаем ее снизу или скрываем */
+    /* 5. БОКОВАЯ ПАНЕЛЬ - СПРАВА */
     .services-sidebar {
-        width: 100%;
+        position: fixed;
+        right: 0; /* Переносим на правую сторону */
+        left: auto;
+        top: 50%;
+        transform: translateY(-50%) translateX(calc(100% - 40px)); /* Прячем вправо */
+        width: 250px; /* Ширина развернутого меню */
         height: auto;
-        bottom: 0;
-        top: auto;
-        left: 0;
-        transform: translateY(calc(100% - 40px)); /* Прячем вниз, оставляем хвостик */
-        z-index: 1000;
-        transition: transform 0.4s ease;
+        max-height: 80vh;
+        z-index: 2000;
+        transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
     }
 
-    .services-sidebar:hover {
-        transform: translateY(0); /* Выезжает снизу при касании */
+    /* Раскрытие при касании/наведении */
+    .services-sidebar:hover,
+    .services-sidebar:active {
+        transform: translateY(-50%) translateX(0);
     }
 
     .sidebar-trigger {
-        width: 100%;
-        height: 40px;
-        writing-mode: horizontal-tb; /* Текст горизонтально */
-        transform: none;
+        position: absolute;
+        left: -40px; /* Ярлык слева от самой панели */
+        top: 0;
+        width: 40px;
+        height: 150px;
+        background: #000;
+        writing-mode: vertical-rl;
+        transform: rotate(180deg);
         display: flex;
         justify-content: center;
         align-items: center;
+        color: #fff;
+        font-size: 12px;
+        border-radius: 10px 0 0 10px;
+        box-shadow: -2px 0 10px rgba(0,0,0,0.2);
     }
 
     .sidebar-nav {
+        background: #000;
         padding: 20px;
-        display: grid;
-        grid-template-columns: 1fr 1fr; /* Услуги в две колонки */
-        gap: 10px;
+        display: flex;
+        flex-direction: column;
+        gap: 15px;
+        border-left: 2px solid #005bb5;
     }
 
-    /* 4. Внутренние страницы (About, Karriere, Services) */
+    .sidebar-nav a {
+        font-size: 14px;
+        padding: 10px;
+        border-bottom: 1px solid #222;
+    }
+
+    /* 6. КОРРЕКТИРОВКА ВНУТРЕННИХ СТРАНИЦ */
     .content-wrapper {
-        padding-top: 80px;
-        padding-left: 10px;
-        padding-right: 10px;
+        padding: 80px 15px 40px;
     }
 
     .about-card, .service-content-card {
-        padding: 30px 20px;
-        border-radius: 20px;
-        margin-top: 20px;
-    }
-
-    .service-title {
-        flex-direction: column;
-        text-align: center;
-    }
-
-    .services-grid {
-        grid-template-columns: 1fr; /* Карточки услуг по одной в ряд */
-    }
-
-    /* 5. Контактная форма */
-    .contact-container {
-        width: 95%;
-        padding: 30px 20px;
-    }
-
-    .form-row {
-        grid-template-columns: 1fr; /* Поля формы в один столбик */
-    }
-}
-
-/* Для совсем маленьких экранов */
-@media (max-width: 480px) {
-    .hero-content h1 {
-        font-size: 2rem;
-    }
-
-    .nav-menu {
-        display: flex;
-        flex-wrap: wrap; /* Если не влезает, переносим на вторую строку */
-        justify-content: center;
+        padding: 20px;
+        margin-top: 10px;
     }
 }
