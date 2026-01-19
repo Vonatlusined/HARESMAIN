@@ -9,7 +9,13 @@ body { font-family: sans-serif; overflow-x: hidden; }
 
 /* HEADER */
 .main-header { position: fixed; top: 0; width: 100%; padding: 30px 60px; display: flex; justify-content: space-between; z-index: 100; }
-.logo { font-size: 24px; font-weight: bold; }
+.logo {
+    font-size: 24px;
+    font-weight: bold;
+    text-decoration: none;
+    color: #000;
+}
+
 .nav-menu a { margin-left: 20px; text-decoration: none; color: #000; font-weight: bold; }
 
 /* SIDEBAR СПРАВА - ИСПРАВЛЕНО */
