@@ -13,22 +13,27 @@ window.addEventListener('scroll', () => {
         const sidebar = document.querySelector('.services-sidebar');
         const trigger = document.querySelector('.sidebar-trigger');
 
-        // Открываем/закрываем по клику на ярлык
-        trigger.addEventListener('click', function(e) {
-            e.stopPropagation();
-            sidebar.classList.toggle('active');
-        });
+        document.addEventListener('DOMContentLoaded', function() {
+            const toggle = document.getElementById('mobile-toggle');
+            const sidebar = document.querySelector('.services-sidebar');
+            const navLinks = document.querySelectorAll('.sidebar-nav a');
 
-        // Закрываем, если кликнули в любое другое место экрана
-        document.addEventListener('click', function(e) {
-            if (!sidebar.contains(e.target)) {
-                sidebar.classList.remove('active');
-            }
-        });
+            // Клик по бургеру
+            toggle.addEventListener('click', function() {
+                toggle.classList.toggle('active');
+                sidebar.classList.toggle('open');
+                // Запрещаем скролл страницы, когда меню открыто
+                document.body.style.overflow = sidebar.classList.contains('open') ? 'hidden' : 'auto';
+            });
 
-        // Предотвращаем закрытие при клике внутри самой панели
-        sidebar.addEventListener('click', function(e) {
-            e.stopPropagation();
+            // Закрытие при клике на любую ссылку
+            navLinks.forEach(link => {
+                link.addEventListener('click', () => {
+                    toggle.classList.remove('active');
+                    sidebar.classList.remove('open');
+                    document.body.style.overflow = 'auto';
+                });
+            });
         });
     });
 });
