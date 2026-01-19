@@ -1,28 +1,40 @@
 document.addEventListener('DOMContentLoaded', () => {
     const toggle = document.getElementById('mobile-toggle');
     const sidebar = document.querySelector('.services-sidebar');
-    const header = document.querySelector('.main-header');
+    const overlay = document.querySelector('.sidebar-overlay');
 
-    if (!toggle || !sidebar || !header) return;
+    if (!toggle || !sidebar) return;
 
-    // Header scroll (class-based)
-    window.addEventListener('scroll', () => {
-        header.classList.toggle('scrolled', window.scrollY > 50);
-    });
-
-    // Burger
+    // BURGER CLICK
     toggle.addEventListener('click', () => {
         toggle.classList.toggle('active');
         sidebar.classList.toggle('open');
         document.body.classList.toggle('menu-open');
     });
 
-    // Close on link click
+    // CLOSE ON LINK CLICK
     document.querySelectorAll('.sidebar-nav a').forEach(link => {
-        link.addEventListener('click', () => {
-            toggle.classList.remove('active');
-            sidebar.classList.remove('open');
-            document.body.classList.remove('menu-open');
-        });
+        link.addEventListener('click', () => closeMenu());
     });
+
+    // OVERLAY CLICK
+    overlay.addEventListener('click', () => closeMenu());
+
+    // SWIPE TO CLOSE
+    let startX = 0;
+
+    sidebar.addEventListener('touchstart', e => {
+        startX = e.changedTouches[0].screenX;
+    });
+
+    sidebar.addEventListener('touchend', e => {
+        const endX = e.changedTouches[0].screenX;
+        if (endX - startX > 60) closeMenu();
+    });
+
+    function closeMenu() {
+        toggle.classList.remove('active');
+        sidebar.classList.remove('open');
+        document.body.classList.remove('menu-open');
+    }
 });
