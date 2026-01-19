@@ -85,6 +85,35 @@
         </div>
     </section>
 </main>
+<script>
+    const sidebar = document.querySelector('.services-sidebar');
+    const trigger = document.querySelector('.sidebar-trigger');
 
+    // Функция переключения
+    function toggleSidebar(e) {
+        e.preventDefault();
+        e.stopPropagation();
+        sidebar.classList.toggle('open');
+    }
+
+    // Слушаем и клик, и касание пальцем (touchstart) для мгновенной реакции
+    trigger.addEventListener('click', toggleSidebar);
+    trigger.addEventListener('touchstart', toggleSidebar, {passive: false});
+
+    // Закрытие при клике по любой ссылке внутри
+    const links = document.querySelectorAll('.sidebar-nav a');
+    links.forEach(link => {
+        link.addEventListener('click', () => {
+            sidebar.classList.remove('open');
+        });
+    });
+
+    // Закрытие при клике ВНЕ панели
+    document.addEventListener('click', (e) => {
+        if (!sidebar.contains(e.target) && sidebar.classList.contains('open')) {
+            sidebar.classList.remove('open');
+        }
+    });
+</script>
 </body>
 </html>
