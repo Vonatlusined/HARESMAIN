@@ -1,40 +1,32 @@
 document.addEventListener('DOMContentLoaded', () => {
     const toggle = document.getElementById('mobile-toggle');
     const sidebar = document.querySelector('.services-sidebar');
-    const overlay = document.querySelector('.sidebar-overlay');
 
-    if (!toggle || !sidebar) return;
+    if (toggle && sidebar) {
+        // Открыть/Закрыть по кнопке
+        toggle.addEventListener('click', (e) => {
+            e.stopPropagation();
+            toggle.classList.toggle('active');
+            sidebar.classList.toggle('open');
+            document.body.style.overflow = sidebar.classList.contains('open') ? 'hidden' : 'auto';
+        });
 
-    // BURGER CLICK
-    toggle.addEventListener('click', () => {
-        toggle.classList.toggle('active');
-        sidebar.classList.toggle('open');
-        document.body.classList.toggle('menu-open');
-    });
+        // Закрыть при клике на любую ссылку в меню
+        document.querySelectorAll('.sidebar-nav a').forEach(link => {
+            link.addEventListener('click', () => {
+                toggle.classList.remove('active');
+                sidebar.classList.remove('open');
+                document.body.style.overflow = 'auto';
+            });
+        });
 
-    // CLOSE ON LINK CLICK
-    document.querySelectorAll('.sidebar-nav a').forEach(link => {
-        link.addEventListener('click', () => closeMenu());
-    });
-
-    // OVERLAY CLICK
-    overlay.addEventListener('click', () => closeMenu());
-
-    // SWIPE TO CLOSE
-    let startX = 0;
-
-    sidebar.addEventListener('touchstart', e => {
-        startX = e.changedTouches[0].screenX;
-    });
-
-    sidebar.addEventListener('touchend', e => {
-        const endX = e.changedTouches[0].screenX;
-        if (endX - startX > 60) closeMenu();
-    });
-
-    function closeMenu() {
-        toggle.classList.remove('active');
-        sidebar.classList.remove('open');
-        document.body.classList.remove('menu-open');
+        // Закрыть, если кликнули мимо меню (в пустую область слева)
+        document.addEventListener('click', (e) => {
+            if (sidebar.classList.contains('open') && !sidebar.contains(e.target) && !toggle.contains(e.target)) {
+                toggle.classList.remove('active');
+                sidebar.classList.remove('open');
+                document.body.style.overflow = 'auto';
+            }
+        });
     }
 });

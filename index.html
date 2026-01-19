@@ -13,7 +13,7 @@
 <div class="bg-motion"></div>
 
 <header class="main-header">
-    <a href="index.html" class="logo">HARES</a>
+    <div class="logo">HARES</div>
 
     <nav class="nav-menu">
         <a href="index.html">Startseite</a>
@@ -21,7 +21,7 @@
         <a href="karriere.html">Karriere</a>
     </nav>
 
-    <!-- BURGER -->
+    <!-- BURGER (MOBILE) -->
     <div class="mobile-nav-toggle" id="mobile-toggle">
         <span></span>
         <span></span>
@@ -29,15 +29,9 @@
     </div>
 </header>
 
-<!-- SIDEBAR -->
 <aside class="services-sidebar">
+    <div class="sidebar-trigger"><span>LEISTUNGEN</span></div>
     <nav class="sidebar-nav">
-        <a href="index.html">Startseite</a>
-        <a href="about.html">Über uns</a>
-        <a href="karriere.html">Karriere</a>
-
-        <div class="sidebar-divider"></div>
-
         <a href="objektschutz.html">Objektschutz</a>
         <a href="eventschutz.html">Eventschutz</a>
         <a href="brandschutz.html">Brandschutz</a>
@@ -45,28 +39,81 @@
     </nav>
 </aside>
 
-<!-- OVERLAY (BONUS) -->
-<div class="sidebar-overlay"></div>
-
 <main>
     <section class="hero-split">
         <div class="hero-left">
-            <p class="pre-title">Sicherheit ist Vertrauenssache</p>
-            <h1>HARES – Ihr Partner für Sicherheit</h1>
-            <p>Sicherheit in Berlin – zertifiziert, zuverlässig.</p>
+            <div class="motto-box">
+                <p class="pre-title">Sicherheit ist Vertrauenssache</p>
+                <h1>HARES – Ihr Partner für Sicherheit</h1>
+                <p>Sicherheit in Berlin – zertifiziert, zuverlässig, vielseitig einsetzbar.</p>
+
+                <div class="hero-text">
+                    <h3>Wie viel Sicherheit passt zu Ihnen?</h3>
+                    <p>Reicht es, wenn jemand da ist, oder braucht es mehr als bloße Präsenz?</p>
+                    <p>Wir glauben: Wer Verantwortung übernimmt, sollte auch den Anspruch haben, echten Mehrwert zu schaffen – mit klarem Blick, Haltung und Engagement.</p>
+                    <p>Deshalb denken wir Sicherheit neu. Entstanden aus einer klaren Vision und aufgebaut mit Erfahrung, Leidenschaft und einem modernen Anspruch, stehen wir heute für durchdachte Sicherheitslösungen, die wirken.</p>
+                    <p>Ob für Unternehmen, Veranstaltungen oder sensible Bereiche: Wir bieten nicht nur Dienstleistung, sondern Verlässlichkeit mit System.</p>
+                    <p><strong>Für alle, die mehr erwarten als den Standard. Und für alle, die bereit sind, Sicherheit anders zu denken.</strong></p>
+                </div>
+            </div>
         </div>
 
         <div class="hero-right">
             <model-viewer
                     src="flashlight.glb"
                     auto-rotate
+                    rotation-per-second="15deg"
                     camera-controls
+                    bounds="tight"
+                    environment-image="neutral"
+                    exposure="1"
                     interaction-prompt="none">
             </model-viewer>
         </div>
     </section>
+
+    <div class="full-width-divider">
+        HARES — WIR SCHÜTZEN, WAS ZÄHLT
+    </div>
+
+    <section class="contact-section">
+        <div class="contact-card">
+            <h2>Kontaktanfrage</h2>
+
+            <form class="hares-form">
+                <label>Anrede*</label>
+                <div class="radio-row">
+                    <input type="radio" name="anrede" value="Herr"> Herr
+                    <input type="radio" name="anrede" value="Frau"> Frau
+                </div>
+
+                <input type="text" placeholder="Name *" required>
+                <input type="email" placeholder="E-Mail-Adresse*" required>
+                <input type="tel" placeholder="Telefonnummer *" required>
+
+                <label>Welche Dienstleistung benötigen Sie?*</label>
+                <select required>
+                    <option value="Objektschutz">Objektschutz</option>
+                    <option value="Eventschutz">Eventschutz</option>
+                    <option value="Brandschutz">Brandschutz</option>
+                </select>
+
+                <textarea placeholder="Nachricht (für eine bessere Einschätzung Ihrer Anfrage)"></textarea>
+
+                <label>Wie möchten Sie kontaktiert werden?*</label>
+                <div class="radio-row">
+                    <input type="radio" name="how" value="Telefonisch"> Telefonisch
+                    <input type="radio" name="how" value="E-Mail"> per E-Mail
+                    <input type="radio" name="how" value="Beides"> Beides
+                </div>
+
+                <button type="submit" class="submit-btn">Absenden</button>
+            </form>
+        </div>
+    </section>
 </main>
 
+<!-- JS -->
 <script src="script.js"></script>
 </body>
 </html>
