@@ -422,46 +422,62 @@ model-viewer { width: 100%; height: 100%; }
         transform: translateY(-50%) translateX(0);
     }
 
+    /* Исправленная панель справа */
+    .services-sidebar {
+        position: fixed;
+        right: 0;
+        top: 50%;
+        transform: translateY(-50%) translateX(100%); /* Полностью прячем за экран */
+        width: 260px;
+        height: auto;
+        z-index: 10000;
+        transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        background: #000;
+        box-shadow: -5px 0 20px rgba(0,0,0,0.5);
+    }
+
+    /* Класс, который будет добавляться через JS при клике */
+    .services-sidebar.active {
+        transform: translateY(-50%) translateX(0);
+    }
+
     .sidebar-trigger {
         position: absolute;
-        left: -40px; /* Ярлык слева от самой панели */
+        left: -40px; /* Ярлык всегда снаружи */
         top: 0;
         width: 40px;
-        height: 150px;
-        background: #000;
-        writing-mode: vertical-rl;
-        transform: rotate(180deg);
+        height: 140px;
+        background: #005bb5; /* Синий цвет, чтобы было заметно */
+        color: #fff;
         display: flex;
         justify-content: center;
         align-items: center;
-        color: #fff;
-        font-size: 12px;
+        writing-mode: vertical-rl;
+        transform: rotate(180deg);
+        cursor: pointer;
         border-radius: 10px 0 0 10px;
-        box-shadow: -2px 0 10px rgba(0,0,0,0.2);
+        font-weight: bold;
+        letter-spacing: 1px;
     }
 
     .sidebar-nav {
-        background: #000;
         padding: 20px;
         display: flex;
         flex-direction: column;
-        gap: 15px;
-        border-left: 2px solid #005bb5;
+        gap: 10px;
     }
 
     .sidebar-nav a {
-        font-size: 14px;
-        padding: 10px;
-        border-bottom: 1px solid #222;
+        padding: 15px;
+        background: #111;
+        border-radius: 8px;
+        color: #fff;
+        text-decoration: none;
+        border-left: 3px solid transparent;
     }
 
-    /* 6. КОРРЕКТИРОВКА ВНУТРЕННИХ СТРАНИЦ */
-    .content-wrapper {
-        padding: 80px 15px 40px;
-    }
-
-    .about-card, .service-content-card {
-        padding: 20px;
-        margin-top: 10px;
+    .sidebar-nav a:active {
+        background: #005bb5;
+        border-left-color: #fff;
     }
 }

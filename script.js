@@ -9,4 +9,27 @@ window.addEventListener('scroll', () => {
         header.style.padding = "30px 60px";
         header.style.boxShadow = "none";
     }
+
+    document.addEventListener('DOMContentLoaded', function() {
+        const sidebar = document.querySelector('.services-sidebar');
+        const trigger = document.querySelector('.sidebar-trigger');
+
+        // Открываем/закрываем по клику на ярлык
+        trigger.addEventListener('click', function(e) {
+            e.stopPropagation();
+            sidebar.classList.toggle('active');
+        });
+
+        // Закрываем, если кликнули в любое другое место экрана
+        document.addEventListener('click', function(e) {
+            if (!sidebar.contains(e.target)) {
+                sidebar.classList.remove('active');
+            }
+        });
+
+        // Предотвращаем закрытие при клике внутри самой панели
+        sidebar.addEventListener('click', function(e) {
+            e.stopPropagation();
+        });
+    });
 });
