@@ -4,7 +4,6 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>HARES | Sicherheit – Ihr Partner in Berlin</title>
-
     <script type="module" src="https://ajax.googleapis.com/ajax/libs/model-viewer/3.3.0/model-viewer.min.js"></script>
     <link rel="stylesheet" href="style.css">
 </head>
@@ -13,18 +12,16 @@
 <div class="bg-motion"></div>
 
 <header class="main-header">
-    <div class="logo">HARES</div>
-
+    <div class="logo" style="font-weight: 900; font-size: 1.5rem; letter-spacing: 2px;">HARES</div>
     <nav class="nav-menu">
         <a href="index.html">Startseite</a>
         <a href="about.html">Über uns</a>
         <a href="karriere.html">Karriere</a>
     </nav>
-
     <div class="mobile-nav-toggle" id="mobile-toggle">
-        <span></span>
-        <span></span>
-        <span></span>
+        <div class="bar"></div>
+        <div class="bar"></div>
+        <div class="bar"></div>
     </div>
 </header>
 
@@ -43,30 +40,32 @@
         <div class="intro-content">
             <p class="pre-title">Sicherheit ist Vertrauenssache</p>
             <h1>HARES – Ihr Partner für Sicherheit</h1>
-            <p class="motto-text">Sicherheit in Berlin – zertifiziert, zuverlässig, vielseitig einsetzbar.</p>
+            <p class="motto-text" style="color: rgba(255,255,255,0.7);">Sicherheit in Berlin – zertifiziert, zuverlässig, vielseitig einsetзbar.</p>
         </div>
     </section>
 
     <section class="hero-split">
         <div class="hero-content-wrapper">
-            <div class="hero-left">
+            <div class="hero-left reveal-text">
                 <div class="hero-text">
-                    <h3>Wie viel Sicherheit passt zu Ihnen?</h3>
+                    <h3 style="color: #007bff; margin-bottom: 15px;">Wie viel Sicherheit passt zu Ihnen?</h3>
                     <p>Reicht es, wenn jemand da ist, oder braucht es mehr als bloße Präsenz?</p>
                     <p>Wir glauben: Wer Verantwortung übernimmt, sollte auch den Anspruch haben, echten Mehrwert zu schaffen – mit klarem Blick, Haltung und Engagement.</p>
                     <p><strong>Für alle, die mehr erwarten als den Standard.</strong></p>
                 </div>
             </div>
-
             <div class="hero-right">
                 <model-viewer
                         src="flashlight.glb"
                         auto-rotate
-                        rotation-per-second="20deg"
+                        rotation-per-second="30deg"
                         camera-controls
+                        enable-pan="false"
+                        disable-zoom="true"
                         bounds="tight"
                         exposure="1.2"
-                        interaction-prompt="none">
+                        interaction-prompt="none"
+                        shadow-intensity="1">
                 </model-viewer>
             </div>
         </div>
@@ -78,9 +77,8 @@
 
     <section class="contact-section">
         <div class="contact-card">
-            <h2>Kontaktanfrage</h2>
+            <h2 style="margin-bottom: 30px; text-align: center; font-size: 2rem;">Kontaktanfrage</h2>
             <form class="hares-form">
-
                 <div class="full-width">
                     <label>Anrede*</label>
                     <div class="radio-row">
@@ -88,23 +86,21 @@
                         <label><input type="radio" name="anrede" value="Frau"> Frau</label>
                     </div>
                 </div>
-
                 <div>
                     <label>Name*</label>
-                    <input type="text" placeholder="Ваше имя" required>
+                    <input type="text" placeholder="Ваше имя" required name="name">
                 </div>
                 <div>
                     <label>Email*</label>
-                    <input type="email" placeholder="mail@example.com" required>
+                    <input type="email" placeholder="mail@example.com" required name="email">
                 </div>
-
                 <div>
                     <label>Telefonnummer*</label>
-                    <input type="tel" placeholder="+49..." required>
+                    <input type="tel" placeholder="+49..." required name="phone">
                 </div>
                 <div>
                     <label>Welche Dienstleistung benötigen Sie?*</label>
-                    <select required>
+                    <select required name="service">
                         <option value="" disabled selected>Bitte wählen...</option>
                         <option value="Objektschutz">Objektschutz</option>
                         <option value="Eventschutz">Eventschutz</option>
@@ -112,12 +108,10 @@
                         <option value="Revierdienst">Revierdienst</option>
                     </select>
                 </div>
-
                 <div class="full-width">
                     <label>Nachricht (für eine bessere Einschätzung Ihrer Anfrage)</label>
-                    <textarea rows="4" placeholder="Beschreiben Sie kurz Ihr Anliegen..."></textarea>
+                    <textarea rows="4" placeholder="Beschreiben Sie kurz Ihr Anliegen..." name="message"></textarea>
                 </div>
-
                 <div class="full-width">
                     <label>Wie möchten Sie kontaktiert werden?</label>
                     <div class="radio-row contact-options">
@@ -126,7 +120,6 @@
                         <label><input type="radio" name="contact-pref" value="Beides"> Beides</label>
                     </div>
                 </div>
-
                 <button type="submit" class="submit-btn">Anfrage Senden</button>
             </form>
         </div>
